@@ -2,16 +2,17 @@
 //TThere should be FOUR of each value:
  //2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', and 'A'.
  // Note that you DO NOT need to worry about suits (unless you do Adventure Mode).
-let deck = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ];
+let cardValues = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q,', 'K', 'A'];
 
 module.exports = function buildDeck() {
-//let shuffleDeck = [];
-//let randoCard = shuffleDeck.push(deck[deckmath.floor(math.random() * deck.length());
+  let deck = [];
 
-
-
+  for (let i=0; i<4; i++) {
+    deck = deck.concat(cardValues);
+  }
+//shuffleDeck.push(deck[math.floor(math.random() * deck.length())]);
 
   return deck;
 };
 
-console.log(deck);
+console.log(module.exports());
