@@ -1,7 +1,7 @@
 let game = require('./deck.js');
 let cardValues = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q,', 'K', 'A'];
 
-module.exports = function warGame(player1, player2) {
+module.exports = function warGame(players) {
   let deck = game();//game.builddeck because when you require a file it comes in an obj
   //because of mod exports and with in that are the fn that i exported have to use . syntax to get to it
 
@@ -14,45 +14,37 @@ module.exports = function warGame(player1, player2) {
     if (cardValues.indexOf(deck[i]) > cardValues.indexOf(deck[i+1])){
       console.log( 'player 1 wins the hand');
       numberOfWinsForPlayerOne++;
+      numberOfPlays++;
     } else if (cardValues.indexOf(deck[i]) < cardValues.indexOf(deck[i+1])) {
       console.log( 'player 2 wins the hand');
       numberOfWinsForPlayerTwo++;
+      numberOfPlays++;
     } else {
-    console.log( 'they tied');
+      console.log( 'they tied');
+      numberOfTies++;
+      numberOfPlays++;
+    }
 
+    console.log( 'player 1 wins', numberOfWinsForPlayerOne);
+    console.log( 'player 2 wins', numberOfWinsForPlayerTwo);
+    console.log( 'ties', numberOfTies);
   }
 
-  console.log( 'player 1 wins', numberOfWinsForPlayerOne);
-  console.log( 'player 2 wins', numberOfWinsForPlayerTwo);
-  console.log( 'ties', numberOfTies);
-}
+  let pOne = {
+    name: players[0],
+    numberOfWins: numberOfWinsForPlayerOne,
+    winRatio:(numberOfWinsForPlayerOne/ numberOfPlays).toFixed(2)
+  };
+  let pTwo = {
+    name: players[1],
+    numberOfWins: numberOfWinsForPlayerTwo,
+    winRatio:(numberOfWinsForPlayerTwo/ numberOfPlays).toFixed(2)
+  };
 
-
-// let scoreSheet = {
-//     date: now.getMonth() + 1 + '-' + now.getDate() + '-' + now.getFullYear() + ' at ' + now.getHours() + ':' + now.getMinutes(),
-//     players: [pOneObj , pTwoObj],
-//     numberOfTies: tie
-// };
-
-let pOne = {
-  player: player1,
-  numberOfWins: numberOfWinsForPlayerOne,
-  winRatio:(numberOfWinsForPlayerOne / numberOfPlays).toFixed(2)
-};
-let pTwo = {
-  player: player2,
-  numberOfWins: numberOfWinsForPlayerTwo,
-  winRatio:(numberOfWinsForPlayerTwo / numberOfPlays).toFixed(2)
-};
-
-let scoreSheet = {
-  players: [pOne, pTwo],
-  numberOfTies: ties
-};
-return scoreSheet;
-
-//  this.date = new Date();
-//  this.players = player1, player2;
-// return {players: this.players, date: this.date};
-// };
+  let scoreSheet = {
+    players: [pOne, pTwo],
+    numberOfTies: ties,
+    date: new Date()
+  };
+  return scoreSheet;
 };
